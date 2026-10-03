@@ -72,7 +72,7 @@
     if (resumePane) resumePane.style.display = "none";
     if (termPane) termPane.style.display = "flex";
 
-    if (input) input.focus();
+    if (input && window.innerWidth > 860) input.focus();
   }
 
   function closeResumeTab(e) {
@@ -339,13 +339,13 @@
     if (!animate || isRaw) {
       out.innerHTML = html;
       scrollDown();
-      if (isRaw) { busy = false; input.disabled = false; input.focus(); }
+      if (isRaw) { busy = false; input.disabled = false; if (window.innerWidth > 860) input.focus(); }
       return;
     }
     typeInto(out, html, function () {
       busy = false;
       input.disabled = false;
-      input.focus();
+      if (window.innerWidth > 860) input.focus();
       scrollDown();
     });
   }
@@ -358,7 +358,7 @@
       logEl.innerHTML = "";
       input.value = "";
       histIndex = -1;
-      input.focus();
+      if (window.innerWidth > 860) input.focus();
       return;
     }
     busy = true;
@@ -402,7 +402,7 @@
       return;
     }
     if (e.target.closest("a, button")) return;
-    input.focus();
+    if (window.innerWidth > 860) input.focus();
   });
 
   meBtn.addEventListener("click", function () { run("about"); });
@@ -410,7 +410,7 @@
   /* ── boot ───────────────────────────────────────────────── */
   function boot(animate) {
     appendEntry("welcome", renderBody(cfg.welcome), false, animate, false);
-    if (!animate) input.focus();
+    if (!animate && window.innerWidth > 860) input.focus();
   }
 
   /* ── Background Music Player ── */
