@@ -586,21 +586,49 @@ body {
 
 /* ── responsive ──────────────────────────────────────────── */
 @media (max-width: 860px) {
-  body { padding: 12px; }
+  body { 
+    padding: 10px; 
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+  }
   .shell {
-    grid-template-columns: 1fr;
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: visible;
+    flex: none;
+  }
+  .side {
+    align-items: center;
+    text-align: center;
+    padding: 0;
   }
   .portrait {
-    max-height: 420px;
-    aspect-ratio: 4 / 5;
-    width: min(100%, 320px);
+    max-height: 280px;
+    width: 220px;
+    margin: 0 auto;
   }
-  .term { min-height: 70vh; }
-  .identity h1 { font-size: 1.5rem; }
+  .term { 
+    height: 65vh;
+    min-height: 500px; 
+    flex: none;
+  }
+  .identity h1 { font-size: 1.6rem; }
   .tab-title { max-width: 140px; }
   .titlebar:not(.has-tabs) .term-tab { margin-right: 0; }
   .resume-pane { min-height: 480px; }
+  
+  .dock {
+    flex-direction: column;
+    text-align: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .proj-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── project cards ───────────────────────────────────────── */
