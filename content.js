@@ -22,7 +22,7 @@ window.PORTFOLIO = {
   resumeLabel: "ABHISHEK KUMAR_ML_Resume.pdf",
 
   // Background music
-  musicFile: "music.mp3",
+  youtubeVideoId: "Umqb9KENgWE",
   musicTitle: "Tum Hi Ho (Aashiqui 2)",
 
   welcome: `Hi, I'm Abhishek Kumar — Data Scientist based in India.

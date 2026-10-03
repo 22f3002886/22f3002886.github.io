@@ -414,50 +414,67 @@
   }
 
   /* ── Background Music Player ── */
-  let bgAudio = null;
-  const musicFile = cfg.musicFile || "music.mp3";
+  let ytPlayer = null;
+  let isYtReady = false;
+  const videoId = cfg.youtubeVideoId || "Umqb9KENgWE";
   const musicTitle = cfg.musicTitle || "Tum Hi Ho (Aashiqui 2)";
 
   const playIcon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>';
   const pauseIcon = '<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor" aria-hidden="true"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>';
 
+  window.onYouTubeIframeAPIReady = function() {
+    ytPlayer = new YT.Player('youtube-player', {
+      height: '0',
+      width: '0',
+      videoId: videoId,
+      playerVars: {
+        'autoplay': 0,
+        'controls': 0,
+        'disablekb': 1,
+        'fs': 0,
+        'rel': 0,
+        'modestbranding': 1,
+        'playsinline': 1,
+        'loop': 1,
+        'playlist': videoId
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    });
+  };
+
+  function onPlayerReady(event) {
+    isYtReady = true;
+    event.target.setVolume(55);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+      musicBtn.setAttribute("aria-pressed", "true");
+      musicBtn.innerHTML = pauseIcon + '<span>♪ Playing: ' + esc(musicTitle) + '</span>';
+      playing = true;
+    } else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) {
+      musicBtn.setAttribute("aria-pressed", "false");
+      musicBtn.innerHTML = playIcon + '<span>Wanna hear some music</span>';
+      playing = false;
+    }
+  }
+
   function toggleMusic() {
-    if (!bgAudio) {
-      bgAudio = new Audio(musicFile);
-      bgAudio.loop = true;
-      bgAudio.volume = 0.55;
-
-      bgAudio.addEventListener("play", function () {
-        musicBtn.setAttribute("aria-pressed", "true");
-        musicBtn.innerHTML = pauseIcon + '<span>♪ Playing: ' + esc(musicTitle) + '</span>';
-      });
-
-      bgAudio.addEventListener("pause", function () {
-        musicBtn.setAttribute("aria-pressed", "false");
+    if (!isYtReady || !ytPlayer) {
+      musicBtn.innerHTML = playIcon + '<span style="color:#f87171;">Loading music player...</span>';
+      setTimeout(function () {
         musicBtn.innerHTML = playIcon + '<span>Wanna hear some music</span>';
-      });
-
-      bgAudio.addEventListener("ended", function () {
-        musicBtn.setAttribute("aria-pressed", "false");
-        musicBtn.innerHTML = playIcon + '<span>Wanna hear some music</span>';
-      });
-
-      bgAudio.addEventListener("error", function (e) {
-        console.error("Audio failed to load:", e);
-        musicBtn.setAttribute("aria-pressed", "false");
-        musicBtn.innerHTML = playIcon + '<span style="color:#f87171;">Could not load ' + esc(musicFile) + '</span>';
-        setTimeout(function () {
-          musicBtn.innerHTML = playIcon + '<span>Wanna hear some music</span>';
-        }, 3500);
-      });
+      }, 2000);
+      return;
     }
 
-    if (!bgAudio.paused) {
-      bgAudio.pause();
+    if (playing) {
+      ytPlayer.pauseVideo();
     } else {
-      bgAudio.play().catch(function (err) {
-        console.error("Audio playback error:", err);
-      });
+      ytPlayer.playVideo();
     }
   }
 
