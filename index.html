@@ -1,11 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abhishek</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhishek Kumar</title>
+  <meta name="description" content="Interactive terminal portfolio of Abhishek Kumar, data scientist." />
+  <meta property="og:title" content="Abhishek Kumar | Data Scientist" />
+  <meta property="og:description" content="Interactive terminal portfolio. Type help to look around." />
+  <meta property="og:url" content="https://abhishekrthakur.me/" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Abhishek</h1>
+  <div class="shell">
+    <aside class="side">
+      <div class="identity">
+        <h1 id="name">Abhishek Kumar</h1>
+        <p id="title">Data Scientist</p>
+      </div>
+      <figure class="portrait">
+        <img src="avatar.jpg" alt="Portrait of Abhishek Kumar" />
+      </figure>
+      <button class="me" id="me" type="button">[Yeah! that's me]</button>
+    </aside>
+
+    <section class="term" aria-label="Portfolio terminal">
+      <!-- macOS-style title bar with terminal tabs -->
+      <div class="titlebar">
+        <div class="dots" aria-hidden="true">
+          <span class="dot dot-close"></span>
+          <span class="dot dot-min"></span>
+          <span class="dot dot-max"></span>
+        </div>
+        <div class="term-tabs" id="term-tabs" role="tablist">
+          <button class="term-tab active" id="tab-term" type="button" role="tab" aria-selected="true" aria-controls="term-pane">
+            <span class="tab-icon">❯_</span>
+            <span class="tab-title">abhishek@portfolio — zsh</span>
+          </button>
+          <button class="term-tab" id="tab-resume" type="button" role="tab" aria-selected="false" aria-controls="resume-pane" style="display: none;">
+            <span class="tab-icon">📄</span>
+            <span class="tab-title" id="tab-resume-label">resume.pdf</span>
+            <span class="tab-close" id="tab-resume-close" title="Close tab" aria-label="Close resume tab">✕</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- terminal pane -->
+      <div class="term-pane" id="term-pane" role="tabpanel">
+        <!-- command chips -->
+        <nav class="chips" id="chips" aria-label="Commands"></nav>
+
+        <!-- terminal screen -->
+        <div class="screen" id="screen">
+          <div id="log"></div>
+          <div class="caret-row">
+            <span class="prompt" id="prompt"></span>
+            <form id="form" autocomplete="off">
+              <input id="input" type="text" aria-label="Type a command..." placeholder="Type a command..." spellcheck="false" />
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- resume viewer pane (opens as another tab in this terminal window) -->
+      <div class="resume-pane" id="resume-pane" role="tabpanel" style="display: none;">
+        <div class="resume-toolbar">
+          <div class="resume-doc-info">
+            <span class="resume-doc-tag">PDF</span>
+            <span class="resume-doc-name" id="resume-filename">ABHISHEK KUMAR_ML_Resume.pdf</span>
+          </div>
+          <div class="resume-actions">
+            <a class="resume-action-btn" id="resume-download-btn" href="ABHISHEK KUMAR_ML_Resume.pdf" download="ABHISHEK_KUMAR_Resume.pdf">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              <span>Download</span>
+            </a>
+            <a class="resume-action-btn" id="resume-external-btn" href="ABHISHEK KUMAR_ML_Resume.pdf" target="_blank" rel="noopener noreferrer" title="Open in new browser tab">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+              <span>Pop-out</span>
+            </a>
+            <button class="resume-action-btn resume-close-btn" id="resume-pane-close" type="button" title="Close resume tab">
+              <span>✕ Close Tab</span>
+            </button>
+          </div>
+        </div>
+        <div class="resume-viewer-wrap">
+          <iframe class="resume-iframe" id="resume-iframe" src="" title="Resume PDF"></iframe>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer class="dock">
+    <button class="music" id="music" type="button" aria-pressed="false">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      <span id="music-label">Wanna hear some music</span>
+    </button>
+    <div class="clock" id="clock"></div>
+  </footer>
+
+  <!-- Background Music Audio Element -->
+  <audio id="bg-audio" src="music.mp3" preload="auto" loop></audio>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
