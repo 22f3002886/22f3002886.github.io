@@ -790,3 +790,94 @@ body {
   pointer-events: none;
   transition: background 0.12s;
 }
+
+/* ── light mode ─────────────────────────────────────────── */
+body.light-mode {
+  --bg: #ffffff;
+  --green: #065f46;
+  --green-2: #047857;
+  --line: rgba(6, 95, 70, 0.3);
+  --cmd: #1d4ed8;
+  --danger: #dc2626;
+  color: var(--green);
+}
+body.light-mode .term {
+  background: #f8fafc;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 24px 60px rgba(0, 0, 0, 0.1);
+}
+body.light-mode .portrait {
+  background: #f1f5f9;
+}
+body.light-mode .identity h1 {
+  text-shadow: none;
+}
+body.light-mode .titlebar {
+  background: #e2e8f0;
+  border-bottom: 1px solid #cbd5e1;
+}
+body.light-mode .titlebar.has-tabs .term-tab {
+  background: transparent;
+  color: #475569;
+  border-color: transparent;
+}
+body.light-mode .titlebar.has-tabs .term-tab.active {
+  background: #fff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+body.light-mode .chips {
+  background: #f1f5f9;
+  border-bottom-color: #cbd5e1;
+}
+body.light-mode .proj-card {
+  background: #ffffff;
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+body.light-mode .proj-card:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+body.light-mode .proj-name {
+  color: #0f172a;
+}
+body.light-mode .proj-summary {
+  color: #334155;
+}
+body.light-mode .proj-detail {
+  color: #475569;
+}
+body.light-mode .typed, body.light-mode .out {
+  color: #0f172a;
+  font-weight: 500;
+}
+body.light-mode .clock, body.light-mode .tab-close, body.light-mode .resume-doc-name {
+  color: #475569;
+}
+body.light-mode .theme-toggle {
+  background: transparent;
+  border: 0;
+  font-size: 1.1rem;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+body.light-mode .theme-toggle:hover {
+  background: rgba(0,0,0,0.05);
+}
+.theme-toggle {
+  background: transparent;
+  border: 0;
+  font-size: 1.1rem;
+  padding: 4px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.theme-toggle:hover {
+  background: rgba(255,255,255,0.1);
+}

@@ -514,5 +514,29 @@
     });
   })();
 
+  /* ── Theme Toggle ── */
+  const themeToggleBtn = document.getElementById("theme-toggle");
+  const themeIcon = document.getElementById("theme-icon");
+  let isLightMode = localStorage.getItem("theme") === "light";
+  
+  function applyTheme() {
+    if (isLightMode) {
+      document.body.classList.add("light-mode");
+      themeIcon.textContent = "🌙";
+    } else {
+      document.body.classList.remove("light-mode");
+      themeIcon.textContent = "☀️";
+    }
+  }
+  
+  if (themeToggleBtn) {
+    applyTheme();
+    themeToggleBtn.addEventListener("click", function() {
+      isLightMode = !isLightMode;
+      localStorage.setItem("theme", isLightMode ? "light" : "dark");
+      applyTheme();
+    });
+  }
+
   boot(false);
 })();
